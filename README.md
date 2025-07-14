@@ -16,16 +16,18 @@ The **Water Quality AI API and Dashboard** is a full-stack application designed 
 ## Project Structure
 
 ```
-├── app.py                 # Streamlit frontend for the dashboard
-├── auth.py                # FastAPI authentication endpoints (register, login)
-├── main.py                # FastAPI main application with CORS and router setup
-├── model.py               # FastAPI prediction and report management endpoints
-├── monitor.py             # FastAPI drift monitoring endpoint and MQTT setup
-├── style.css              # Custom CSS for Streamlit dashboard
-├── requirements.txt       # Backend dependencies
-├── requirements.txt       # Frontend dependencies (Streamlit-specific)
-├── .env                   # Environment variables (MongoDB URI, Secret Key)
-└── water_quality_model.pkl # Pre-trained machine learning model (not included)
+ ├──frontend/
+      ├── app.py                 # Streamlit frontend for the dashboard
+      ├── style.css              # Custom CSS for Streamlit dashboard
+      ├── requirements.txt       # Frontend dependencies (Streamlit-specific)
+ ├──backend/
+      ├── main.py                # FastAPI main application with CORS and router setup
+      ├── model.py               # FastAPI prediction and report management endpoints
+      ├── monitor.py             # FastAPI drift monitoring endpoint and MQTT setup
+      ├── requirements.txt       # Backend dependencies
+      ├── auth.py                # FastAPI authentication endpoints (register, login)
+      ├── .env                   # Environment variables (MongoDB URI, Secret Key)
+      └── water_quality_model.pkl # Pre-trained machine learning model 
 ```
 
 ## Prerequisites

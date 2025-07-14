@@ -116,3 +116,17 @@ async def get_report(report_id: str, user: dict = Depends(get_current_user)):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to retrieve report: {str(e)}")
+
+@router.post("/explain")
+async def explain(file: UploadFile = File(...), user: dict = Depends(get_current_user)):
+    try:
+        if not file.filename.endswith('.csv'):
+            raise HTTPException(status_code=400, detail="Only CSV files are supported")
+        df = pd.read_csv(file.file)
+        if df.empty:
+            raise HTTPException(status_code=400, detail="CSV file is empty")
+        feature_df = df.drop("Potability", axis=1, errors="ignore")
+        shap_values = model.explain_prediction(feature_df)
+        return {"message": "✅ Explanation complete", "explanations": shap_values.tolist()}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Explanation failed: {str(e)}")
